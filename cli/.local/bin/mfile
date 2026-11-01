@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+if [ -z "$1" ]; then
+    echo "Usage: $0 <path/to/file>"
+    exit 1
+fi
+
+FILEPATH="$1"
+
+DIR_PATH=$(dirname "$FILEPATH")
+
+mkdir -p "$DIR_PATH"
+
+touch "$FILEPATH"
