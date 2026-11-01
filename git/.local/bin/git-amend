@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+usage() {
+    printf 'Usage: git-amend [commit-hash]\n' >&2
+    exit 2
+}
+
+[[ $# -le 1 ]] || usage
+
+if [[ $# -eq 0 ]]; then
+    git commit --amend
+    exit $?
+fi
+
+if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+    printf 'git-amend: not inside a Git working tree\n' >&2
+    exit 1
+fi
+
+if ! target=$(git rev-parse --verify --quiet "$1^{commit}"); then
+    printf 'git-amend: commit not found: %s\n' "$1" >&2
+    exit 1
+fi
+
+if ! git merge-base --is-ancestor "$target" HEAD; then
+    printf 'git-amend: commit must be reachable from the current branch\n' >&2
+    exit 1
+fi
+
+if ! git diff --cached --quiet; then
+    printf 'git-amend: staged changes found; commit or unstage them before rewriting history\n' >&2
+    exit 1
+fi
+
+parent=$(git rev-parse "$target^" 2>/dev/null) || {
+    printf 'git-amend: cannot reword the root commit without rewriting branch history manually\n' >&2
+    exit 1
+}
+
+target_short=$(git rev-parse --short "$target")
+GIT_AMEND_TARGET="$target_short" GIT_SEQUENCE_EDITOR='sed -i.bak "s/^pick $GIT_AMEND_TARGET /reword $GIT_AMEND_TARGET /"' \
+    git rebase -i "$parent"

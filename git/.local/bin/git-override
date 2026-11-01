@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+#
+# rewrites remote status of current branch with local state
+#
+
+git push -u origin +$(git branch --show-current)

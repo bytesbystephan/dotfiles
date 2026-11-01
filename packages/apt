@@ -1,0 +1,13 @@
+git
+stow
+zsh
+fzf
+ripgrep
+bat
+jq
+neovim
+curl
+htop
+tmux
+
+tree

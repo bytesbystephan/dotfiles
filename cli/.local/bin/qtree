@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+exec tree -a -I '\.git|build|vendor|node_modules|cache|var' "$@"
