@@ -51,6 +51,15 @@ vim.opt.mouse = 'c'
 vim.cmd('syntax on')
 
 vim.opt.statusline = '%p %b %f'
+vim.opt.listchars = {
+  tab = '→ ',
+  space = '·',
+  nbsp = '␣',
+  trail = '•',
+  eol = '¶',
+  precedes = '«',
+  extends = '»',
+}
 
 -----------------------------------------------------------
 -- LSP + Treesitter (modern API)
