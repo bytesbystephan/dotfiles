@@ -12,6 +12,12 @@ Feel free to fork this repository and adjust the configurations to your own need
 
 These dotfiles are used on macOs and debian based distributives.
 
+To roll out these configurations on your machine, simply run the following command:
+
+```bash
+git clone https://github.com/bytesbystephan/dotfiles.git
+cd dotfiles && ./install.sh
+```
 
 ## bugs
 
