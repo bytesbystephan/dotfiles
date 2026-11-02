@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+name=$(git config user.name)
+email=$(git config user.email)
+
+printf '%s <%s>\n' "$name" "$email"
