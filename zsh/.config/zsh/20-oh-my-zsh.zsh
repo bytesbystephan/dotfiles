@@ -1,6 +1,8 @@
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="robbyrussell"
 plugins=(
+    sudo
+    jsontools
     git
     zsh-autosuggestions
     zsh-syntax-highlighting
