@@ -4,5 +4,5 @@ else
   export EDITOR=nvim
 fi
 
-alias cl=clear
+# GO
 GOPATH="$HOME/go"
